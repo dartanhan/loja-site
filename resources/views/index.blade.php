@@ -28,7 +28,7 @@ https://templatemo.com/tm-556-catalog-z
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <i class="fas fa-film mr-2"></i>
-                Catalog-Z
+                Catálogo KN Cosméticos
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
@@ -64,7 +64,7 @@ https://templatemo.com/tm-556-catalog-z
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
             <h2 class="col-6 tm-text-primary">
-                Latest Photos
+               Produtos
             </h2>
             <div class="col-6 d-flex justify-content-end align-items-center">
                 <form action="" class="tm-text-primary">
@@ -77,20 +77,20 @@ https://templatemo.com/tm-556-catalog-z
                 <figure class="effect-ming tm-video-item">
                     <img src="{{URL::asset('img/img-03.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Clocks</h2>
+                        <h2>Cílios</h2>
                         <a href="photo-detail.html">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">18 Oct 2020</span>
-                    <span>9,906 views</span>
+                    <span>Unhas</span>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
                     <img src="{{URL::asset('img/img-04.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Plants</h2>
+                        <h2>Renas</h2>
                         <a href="photo-detail.html">View more</a>
                     </figcaption>
                 </figure>
@@ -103,7 +103,7 @@ https://templatemo.com/tm-556-catalog-z
                 <figure class="effect-ming tm-video-item">
                     <img src="{{URL::asset('img/img-05.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Morning</h2>
+                        <h2>Colas</h2>
                         <a href="photo-detail.html">View more</a>
                     </figcaption>
                 </figure>
@@ -116,7 +116,7 @@ https://templatemo.com/tm-556-catalog-z
                 <figure class="effect-ming tm-video-item">
                     <img src="{{URL::asset('img/img-06.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Pinky</h2>
+                        <h2>Esmaltes</h2>
                         <a href="photo-detail.html">View more</a>
                     </figcaption>
                 </figure>
@@ -130,7 +130,7 @@ https://templatemo.com/tm-556-catalog-z
                 <figure class="effect-ming tm-video-item">
                     <img src="{{URL::asset('img/img-01.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Hangers</h2>
+                        <h2>Preparadores</h2>
                         <a href="photo-detail.html">View more</a>
                     </figcaption>
                 </figure>
