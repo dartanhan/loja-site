@@ -27,12 +27,10 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <i class="fas fa-film mr-2"></i>
+            <i class="fas fa-shopping-bag mr-2"></i>
             Catálogo KN Cosméticos
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <!--li class="nav-item">
@@ -53,7 +51,15 @@
     </div>
 </nav>
 
-<div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll" data-image-src="{{URL::asset('img/hero.jpg')}}"></div>
+<div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
+    <div class="logo-container">
+        <img src="{{URL::asset('img/logo.png')}}" alt="Logo" class="img-fluid">
+    </div>
+    <div class="text">
+        <h2>KN COSMÉTICOS</h2>
+        <p>TUDO QUE UMA LASH PRECISA</p>
+    </div>
+</div>
 
 <div class="container-fluid tm-container-content tm-mt-60">
     @yield('content')

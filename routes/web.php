@@ -17,4 +17,6 @@ use App\Http\Controllers\ProdutoController;
 /*Route::get('/', function () {
     return view('index');
 });*/
+Route::get('/produto-datalhe/{id}',[ProdutoController::class,'produto_detalhe'])->name('produto-datalhe');
 Route::resource('/',ProdutoController::class);
+

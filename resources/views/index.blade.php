@@ -6,44 +6,49 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
-            <h2 class=" tm-text-primary text-css-produto" style="text-align: center; border-bottom: 1px solid #CC6699; line-height: 0.1em; margin: 10px 0 20px;">
+            <h2 class=" tm-text-primary text-css-produto">
                 <span style="background-color: #fff; padding: 0 10px;">NOSSOS PRODUTOS</span>
             </h2>
 
         </div>
         <div class="row tm-mb-90 tm-gallery">
+            @foreach($categorias as $categoria)
+
         	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-03.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('../administracao3/storage/app/public/categorias/'.$categoria->id.'/'.$categoria->imagem)}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Cílios</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="{{ route('produto-datalhe', $categoria->id) }}"></a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">18 Oct 2020</span>
-                    <span>Unhas</span>
+                    <span class="tm-text-gray-light"></span>
+                    <span>12,460 views</span>
                 </div>
             </div>
+            @endforeach
+
+    <!--
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-04.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('img/img-04.png')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Renas</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <h2>Maquiagem</h2>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">14 Oct 2020</span>
+                    <span class="tm-text-gray-light"></span>
                     <span>16,100 views</span>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-05.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('img/img-05.png')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Colas</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <h2>Micropigmentação</h2>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -53,10 +58,10 @@
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-06.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('img/img-06.png')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Esmaltes</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -67,10 +72,10 @@
 
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-01.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('img/img-01.png')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Preparadores</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <h2>Unhas</h2>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -80,10 +85,10 @@
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-02.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('img/img-02.png')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Perfumes</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <h2>Depilação</h2>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -93,10 +98,10 @@
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-07.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('img/img-07.png')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Bus</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <h2>Descartáveis</h2>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -106,10 +111,10 @@
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{{URL::asset('img/img-08.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('img/img-08.png')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>New York</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <h2>Sobrancelhas</h2>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -117,12 +122,13 @@
                     <span>11,300 views</span>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+            -->
+            <!--div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
                     <img src="{{URL::asset('img/img-09.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Abstract</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -135,7 +141,7 @@
                     <img src="{{URL::asset('img/img-10.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Flowers</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -148,7 +154,7 @@
                     <img src="{{URL::asset('img/img-11.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Rosy</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -161,7 +167,7 @@
                     <img src="{{URL::asset('img/img-12.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Rocki</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -174,7 +180,7 @@
                     <img src="{{URL::asset('img/img-13.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Purple</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -187,7 +193,7 @@
                     <img src="{{URL::asset('img/img-14.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Sea</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -200,7 +206,7 @@
                     <img src="{{URL::asset('img/img-15.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Turtle</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
@@ -213,14 +219,14 @@
                     <img src="{{URL::asset('img/img-16.jpg')}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
                         <h2>Peace</h2>
-                        <a href="photo-detail.blade.php">View more</a>
+                        <a href="produto-detalhe.blade.php">View more</a>
                     </figcaption>
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
                     <span class="tm-text-gray-light">3 Aug 2020</span>
                     <span>21,204 views</span>
                 </div>
-            </div>
+            </div-->
         </div> <!-- row -->
         <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
