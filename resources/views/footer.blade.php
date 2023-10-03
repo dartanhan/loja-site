@@ -16,7 +16,7 @@
                 </ul>
             </div-->
             <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
-                <h3 class="tm-text-primary mb-4 tm-footer-title">Redes Sociais</h3>
+                <h3 class="tm-text-primary mb-4 tm-footer-title text-white">Redes Sociais</h3>
                 <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
                     <li class="mb-2"><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
                     <li class="mb-2"><a href="https://whatsapp.com/"><i class="fab fa-whatsapp"></i></a></li>

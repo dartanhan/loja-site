@@ -7,14 +7,10 @@
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
-            <h2 class="col-6 tm-text-primary">
-               Produtos
+            <h2 class=" tm-text-primary text-css-produto" style="text-align: center; border-bottom: 1px solid #CC6699; line-height: 0.1em; margin: 10px 0 20px;">
+                <span style="background-color: #fff; padding: 0 10px;">NOSSOS PRODUTOS</span>
             </h2>
-            <div class="col-6 d-flex justify-content-end align-items-center">
-                <form action="" class="tm-text-primary">
-                    Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 200
-                </form>
-            </div>
+
         </div>
         <div class="row tm-mb-90 tm-gallery">
         	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">

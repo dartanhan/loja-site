@@ -193,12 +193,15 @@ a:hover { color: #f18bf1; }
     min-height: 200px;
     background: transparent;
 }
-
+.text-css-produto{
+    color: #CC6699;
+    font-size: 1.2rem;
+}
 .tm-mt-60 { margin-top: 60px; }
 .tm-mb-50 { margin-bottom: 50px; }
 .tm-mb-74 { margin-bottom: 74px; }
 .tm-mb-90 { margin-bottom: 90px; }
-.tm-text-primary { color: #FFF; }
+.tm-text-primary { color: #CC6699; }
 .tm-text-secondary { color: #CC6699; }
 a.tm-text-primary:hover { color:#666666; }
 .tm-bg-gray { background-color: #ee9eee; }
