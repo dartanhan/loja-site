@@ -20,7 +20,7 @@ class ProdutoController extends Controller
    function index(){
 
        //$produtos = $this->produto->all();
-       $categorias = $this->categoria->all();
+       $categorias = $this->categoria->where('status',true)->get();
 
        return view('index', compact('categorias'));
    }
