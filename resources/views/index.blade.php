@@ -17,7 +17,7 @@
                 <figure class="effect-ming tm-video-item">
                     <img src="{{URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_SITE').'/'.$categoria->id.'/'.$categoria->imagem)}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Cílios</h2>
+                        <h2>{{$categoria->nome}}</h2>
                         <a href="{{ route('produto-datalhe', $categoria->id) }}"></a>
                     </figcaption>
                 </figure>
