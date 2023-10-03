@@ -4,7 +4,6 @@
 
 @section('content')
 
-
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
             <h2 class=" tm-text-primary text-css-produto" style="text-align: center; border-bottom: 1px solid #CC6699; line-height: 0.1em; margin: 10px 0 20px;">
