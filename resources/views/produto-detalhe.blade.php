@@ -20,8 +20,8 @@
                         <img src="{{URL::asset('../../'.env('ASSET_URL_IMAGE_CATEGORIA_SITE').'/'.$idCategorigoria.'/'.$categoria->imagem)}}" alt="Image" class="img-fluid">
                         <figcaption class="d-flex align-items-center justify-content-center">
                             <h2>{{$categoria->descricao}}</h2>
-                                                                                <!-- ID CATEGORIA PAI -         ID PRODUTO-->
-                            <a href="{{ route('produto-detalhe-variacoes', ['idCat' => $idCategorigoria,'id' => $categoria->id]) }}"></a>
+                                                                                                 <!-- ID CATEGORIA PAI -         ID PRODUTO-->
+                            <a href="#" onclick="postLink('{{ route('produto-detalhe-variacoes')}}' ,{{$idCategorigoria}} ,{{$categoria->id}})"></a>
                         </figcaption>
                     </figure>
                     <div class="d-flex justify-content-between tm-text-gray">

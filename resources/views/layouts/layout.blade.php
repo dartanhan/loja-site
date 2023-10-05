@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="KN Cosméticos" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>KN Cosméticos</title>
     <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('fontawesome/css/all.min.css')}}">
@@ -38,12 +42,12 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-2" href="videos.html">Videos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="about.html">About</a>
                 </li-->
                 <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="contact.html">Contato</a>
+                    <a class="nav-link nav-link-3" href="{{route('index')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-4" href="#">Contato</a>
                 </li>
             </ul>
         </div>
@@ -53,7 +57,9 @@
 
 <div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
     <div class="logo-container">
-        <img src="{{URL::asset('img/logo.png')}}" alt="Logo" class="img-fluid">
+        <a href="{{route('index')}}">
+            <img src="{{URL::asset('img/logo.png')}}" alt="Logo" class="img-fluid">
+        </a>
     </div>
     <div class="text text-center mt-3">
         <h3>KN COSMÉTICOS</h3>
@@ -70,6 +76,7 @@
 </footer>
 
 <script src="{{URL::asset('js/plugins.js')}}"></script>
+<script src="{{URL::asset('js/scripts.js')}}"></script>
 <script>
     $(window).on("load", function() {
         $('body').addClass('loaded');

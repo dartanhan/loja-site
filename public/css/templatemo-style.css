@@ -252,7 +252,22 @@ a:hover { color: #d4468c; }
     object-fit: cover;
 }
 
+.not-found {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
+.not-found h1 {
+    margin-bottom: 20px;
+}
+
+.not-found img {
+    max-width: 50%;
+    height: auto;
+}
 
 @media (max-width: 768px) {
     .text {
