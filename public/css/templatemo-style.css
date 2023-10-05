@@ -5,7 +5,9 @@ TemplateMo 556 Catalog-Z
 https://templatemo.com/tm-556-catalog-z
 
 */
-
+body{
+    font-family: 'Open Sans';
+}
 #loader-wrapper {
     position: fixed;
     top: 0;
@@ -190,33 +192,37 @@ a:hover { color: #d4468c; }
 .navbar-brand i { font-size: 2rem; }
 
 .tm-hero {
-    background-color: #d4468c; /* Adiciona a cor de fundo desejada */
-    width: 100%; /* Largura 100% para preencher o contêiner pai */
-    height: 210px; /* Altura desejada do elemento hero */
+    background-color: #d4468c;
+    min-height: 210px;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Agora o conteúdo ficará um abaixo do outro */
     align-items: center;
+    justify-content: center;
+    text-align: center; /* Centraliza o texto */
     position: relative;
 }
 
 .tm-hero img {
-    background-color: transparent;
-    max-width: 100%; /* Ajusta a largura máxima da imagem para se adequar à div */
-    max-height: 100%; /* Ajusta a altura máxima da imagem para se adequar à div */
+    max-width: 100%;
+    max-height: 100%;
     height: auto;
-    position: absolute;
-    border: 5px solid white;
     border-radius: 50%;
     background-color: white;
+    border: 5px solid white;
+    position: absolute;
     left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
 }
+
 .logo-container {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .logo-container img {
-    max-width: 100%;
+    max-width: 80%;
     max-height: 100%;
     height: auto;
     border-radius: 50%;
@@ -225,15 +231,12 @@ a:hover { color: #d4468c; }
 }
 
 .text {
-    float: left;
-    color: white;
-    text-align: center;
-    margin-right: 50%;
-}
-
-.text h3 {
-    font-size: 24px;
-    margin-bottom: 5px;
+    position: absolute;
+    margin-top: 20px;
+    left: 25%; /* Ajuste conforme necessário */
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: #ffffff !important;
 }
 
 .text p {
@@ -241,6 +244,30 @@ a:hover { color: #d4468c; }
     margin: 0;
     color: white;
 }
+
+.img-max-height-300 {
+    max-height: 230px;
+    width: auto;
+    height: auto; /* Isto assegura que a imagem mantenha a proporção original */
+    object-fit: cover;
+}
+
+
+
+@media (max-width: 768px) {
+    .text {
+        display: none;
+    }
+    .logo-container  {
+        text-align: center;
+    }
+
+    .logo-container img {
+        max-width: 100%;
+        left: 50px;
+    }
+}
+
 .text-css-produto{
     color: #ffc0cb;
     font-size: 1.2rem;
@@ -249,6 +276,42 @@ a:hover { color: #d4468c; }
     line-height: 0.1em;
     margin: 10px 0 20px;
 }
+
+.bread-crumb {
+    font-family: 'Open Sans';
+    background-color: #d4468c;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+}
+
+.bread-crumb-item {
+    display: inline-block;
+    margin: 0;
+    font-size: 15px;
+    color: #ffffff !important;
+}
+
+.bread-crumb-item a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.bread-crumb-item:not(:last-child)::after {
+    content: '/';
+    margin: 0 5px;
+    color: #fff;
+}
+
+.bread-crumb-item.active {
+    font-weight: bold;
+    color: #fff;
+}
+.bread-crumb-item a:hover {
+    text-decoration: underline;
+}
+
 .tm-mt-60 { margin-top: 60px; }
 .tm-mb-50 { margin-bottom: 50px; }
 .tm-mb-74 { margin-bottom: 74px; }
@@ -461,6 +524,10 @@ figure.effect-ming h2 {
 	transition: opacity 0.35s, transform 0.35s;
 	-webkit-transform: scale(1.5);
 	transform: scale(1.5);
+}
+
+figure.effect-ming-detail h2 {
+    font-size: 1.1em;
 }
 
 figure.effect-ming:hover figcaption::before,

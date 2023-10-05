@@ -55,8 +55,8 @@
     <div class="logo-container">
         <img src="{{URL::asset('img/logo.png')}}" alt="Logo" class="img-fluid">
     </div>
-    <div class="text">
-        <h2>KN COSMÉTICOS</h2>
+    <div class="text text-center mt-3">
+        <h3>KN COSMÉTICOS</h3>
         <p>TUDO QUE UMA LASH PRECISA</p>
     </div>
 </div>

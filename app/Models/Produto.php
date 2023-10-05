@@ -11,4 +11,6 @@ class Produto extends Model
 
     public $table = 'loja_produtos_new';
     protected $fillable = [];
+
+
 }

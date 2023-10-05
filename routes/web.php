@@ -18,5 +18,6 @@ use App\Http\Controllers\ProdutoController;
     return view('index');
 });*/
 Route::get('/produto-datalhe/{id}',[ProdutoController::class,'produto_detalhe'])->name('produto-datalhe');
+Route::get('/produto-detalhe-variacoes/{idCat}/{id}',[ProdutoController::class,'produto_detalhe_variacoes'])->name('produto-detalhe-variacoes');
 Route::resource('/',ProdutoController::class);
 
