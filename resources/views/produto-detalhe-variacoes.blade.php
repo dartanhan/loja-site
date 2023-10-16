@@ -14,9 +14,26 @@
                         </ol>
                     </nav>
                 </div>
-                <div class="row tm-mb-90 tm-gallery">
-                    @foreach($produtoDetalheVariacoes as $variacao)
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+
+              <div class="row tm-mb-90 tm-gallery gallery">
+                  @foreach($produtoDetalheVariacoes as $variacao)
+                      <div class="gallery-item text-lef container-img">
+                          <figure class="effect-ming tm-video-item effect-ming-detail">
+                            <img src="{{URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO_SITE').'/'.$variacao->path)}}" alt="Image" class="responsive">
+                              <figcaption class="d-flex align-items-center justify-content-center">
+                                  <h2>{{$variacao->descricao}} - {{$variacao->variacao}}</h2>
+                              </figcaption>
+                          </figure>
+                          <div class="d-flex justify-content-between tm-text-gray">
+                              <span class="tm-text-gray-light"></span>
+                              <span>12,460 views</span>
+                          </div>
+                      </div>
+                  @endforeach
+              </div>
+                <!-- div class="row tm-mb-90 tm-gallery gallery">
+                    @ foreach($produtoDetalheVariacoes as $variacao)
+                        <div class="gallery-item">
                             <figure class="effect-ming tm-video-item effect-ming-detail">
                                 <img src="{{URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO_SITE').'/'.$variacao->path)}}" alt="Image" class="img-fluid">
                                 <figcaption class="d-flex align-items-center justify-content-center">
@@ -28,9 +45,9 @@
                                 <span>12,460 views</span>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            </div>
+                    @ endforeach
+                </div-->
+          </div>
         @else
 
             <div class="container not-found">

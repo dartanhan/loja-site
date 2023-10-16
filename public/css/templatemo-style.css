@@ -763,3 +763,55 @@ select:not([multiple]) {
 
     .tm-social-links li { margin-right: 3px; }
 }
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.container-img{
+    max-width: 420px;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    position: relative;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item {
+    width: auto;
+    height: auto;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.gallery-item .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item:hover .caption {
+    opacity: 1;
+}
