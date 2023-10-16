@@ -246,7 +246,7 @@ a:hover { color: #d4468c; }
 }
 
 .img-max-height-300 {
-    max-height: 230px;
+    max-height: 300px;
     width: auto;
     height: auto; /* Isto assegura que a imagem mantenha a proporção original */
     object-fit: cover;

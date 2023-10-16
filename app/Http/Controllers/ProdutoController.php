@@ -40,7 +40,9 @@ class ProdutoController extends Controller
 
        $categorias = $this->categoria
            ->Join('loja_produtos_new','loja_categorias.id','=' ,'loja_produtos_new.categoria_id')
-           ->where(['categoria_id' => $categoriaId, 'loja_categorias.status' => true, 'loja_produtos_new.status' => true])->get();
+           ->where(['categoria_id' => $categoriaId,
+               'loja_categorias.status' => true,
+               'loja_produtos_new.status' => true])->get();
 
        return view('produto-detalhe',['categorias'=>$categorias, 'idCategorigoria' => $categoriaId]);
    }
@@ -81,7 +83,8 @@ class ProdutoController extends Controller
                     ['categoria_id' => $categoriaId,
                         'loja_produtos_new.id' => $produtoId,
                         'loja_categorias.status' => true,
-                        'loja_produtos_new.status' => true])->get();
+                        'loja_produtos_new.status' => true,
+                        'loja_produtos_variacao.status' => true])->get();
 
             return view('produto-detalhe-variacoes', ['produtoDetalheVariacoes' => $produtoDetalheVariacoes, 'idCategorigoria' => $categoriaId]);
         }
