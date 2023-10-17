@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ProdutoController extends Controller
@@ -77,6 +78,10 @@ class ProdutoController extends Controller
                     'loja_produtos_variacao.id as variacao_id',
                     'loja_produtos_new.descricao as descricao',
                     'loja_produtos_variacao.variacao as variacao',
+                    (DB::raw("loja_produtos_variacao.valor_varejo as valor_varejo")),
+                    (DB::raw("loja_produtos_variacao.valor_atacado as valor_atacado")),
+                    (DB::raw("loja_produtos_variacao.valor_atacado_5un as valor_atacado_5un")),
+                    (DB::raw("loja_produtos_variacao.valor_atacado_10un as valor_atacado_10un")),
                     'loja_produtos_imagens.path as path'
                 )
                 ->where(

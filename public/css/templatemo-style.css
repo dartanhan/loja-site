@@ -771,7 +771,7 @@ select:not([multiple]) {
 
 .container-img{
     max-width: 420px;
-    max-height: 250px;
+    max-height: 550px;
     width: auto;
     height: auto;
     overflow: hidden;
@@ -814,4 +814,27 @@ select:not([multiple]) {
 
 .gallery-item:hover .caption {
     opacity: 1;
+}
+
+.texto-produto{
+    text-align: center;
+
+}
+
+.product-info {
+    padding: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 0 0 10px 10px;
+    border-top: 1px solid #ddd;
+}
+
+.product-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
 }
