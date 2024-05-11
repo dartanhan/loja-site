@@ -158,8 +158,8 @@ a:hover { color: #d4468c; }
     background-color: #a91657;
     border: 0;
     border-radius: 5px;
-    padding: 12px 50px 14px;
-    font-size: 1.2rem;
+    padding: 5px 10px 4px;
+    font-size: 1.1rem;
 }
 
 .btn-primary:hover,
@@ -766,12 +766,12 @@ select:not([multiple]) {
 .gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
 }
 
 .container-img{
-    max-width: 420px;
-    max-height: 550px;
+    max-width: 400px;
+    max-height: 600px;
     width: auto;
     height: auto;
     overflow: hidden;
@@ -790,9 +790,11 @@ select:not([multiple]) {
 }
 
 .gallery-item img {
-    width: 100%;
-    height: auto;
+    width: 312px;
+    height: 295px;
     object-fit: cover;
+    background-color: white; /* Define o fundo branco */
+    padding: 5px;
 }
 .gallery-item .caption {
     position: absolute;
@@ -816,25 +818,88 @@ select:not([multiple]) {
     opacity: 1;
 }
 
-.texto-produto{
-    text-align: center;
-
-}
-
 .product-info {
-    padding: 10px;
-    text-align: center;
     background-color: #f9f9f9;
-    border-radius: 0 0 10px 10px;
-    border-top: 1px solid #ddd;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.product-info h3 {
-    font-size: 1.2em;
+.product-title {
     margin-bottom: 10px;
+    font-size: 1.2em;
+    text-align: center;
 }
 
-.product-info p {
-    margin: 5px 0;
-    font-size: 0.9em;
+.price-info {
+    display: flex;
+    flex-direction: column;
+    text-align: center; /* Centraliza o texto */
+}
+
+.price-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    background-color: #a91657;
+    color: white;
+}
+
+.price-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-details p {
+    margin: 0;
+}
+
+.quantity--title--wI85xE8 {
+    font-weight: bold; /* Deixa a descrição "Quantidade" em negrito */
+}
+
+.comet-v2-input-number {
+    display: flex;
+    align-items: center;
+}
+
+.comet-v2-input-number-btn {
+    cursor: pointer;
+    padding: 0 8px;
+    color: #333;
+}
+
+.comet-v2-input-number-btn-disabled {
+    cursor: not-allowed;
+    padding: 0 8px;
+    color: #ccc;
+}
+
+.comet-v2-input-number {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+}
+
+.comet-v2-input-number-input {
+    width: 50px;
+    text-align: center;
+}
+
+.quantity--info--jnoo_pD {
+    margin-top: 5px;
+}
+
+.quantity--info--jnoo_pD span {
+    color: #666;
+}
+
+/* Esconde as setas padrão do input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
 }

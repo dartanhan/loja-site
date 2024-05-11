@@ -15,7 +15,13 @@ class ProdutoController extends Controller
 {
     protected $request,$produto,$categoria;
 
-    public function __construct(Request $request, Produto $produto,Categoria $categoria) {
+    /**
+     * ProdutoController constructor.
+     * @param Request $request
+     * @param Produto $produto
+     * @param Categoria $categoria
+     */
+    public function __construct(Request $request, Produto $produto, Categoria $categoria) {
 
         $this->request = $request;
         $this->produto = $produto;
@@ -45,7 +51,7 @@ class ProdutoController extends Controller
                'loja_categorias.status' => true,
                'loja_produtos_new.status' => true])->get();
 
-       return view('produto-detalhe',['categorias'=>$categorias, 'idCategorigoria' => $categoriaId]);
+       return view('produto-detalhe',['categorias'=>$categorias, 'idCategoria' => $categoriaId]);
    }
 
     /***
@@ -67,6 +73,7 @@ class ProdutoController extends Controller
             $categoriaId = $request->input('categoria_id');
             $produtoId = $request->input('produto_id');
 
+
             $produtoDetalheVariacoes = $this->categoria
                 ->Join('loja_produtos_new', 'loja_categorias.id', '=', 'loja_produtos_new.categoria_id')
                 ->Join('loja_produtos_variacao', 'loja_produtos_new.id', '=', 'loja_produtos_variacao.products_id')
@@ -78,20 +85,25 @@ class ProdutoController extends Controller
                     'loja_produtos_variacao.id as variacao_id',
                     'loja_produtos_new.descricao as descricao',
                     'loja_produtos_variacao.variacao as variacao',
+                    'loja_produtos_variacao.quantidade as quantidade',
                     (DB::raw("loja_produtos_variacao.valor_varejo as valor_varejo")),
                     (DB::raw("loja_produtos_variacao.valor_atacado as valor_atacado")),
-                    (DB::raw("loja_produtos_variacao.valor_atacado_5un as valor_atacado_5un")),
-                    (DB::raw("loja_produtos_variacao.valor_atacado_10un as valor_atacado_10un")),
+                    //(DB::raw("loja_produtos_variacao.valor_atacado_5un as valor_atacado_5un")),
+                    //(DB::raw("loja_produtos_variacao.valor_atacado_10un as valor_atacado_10un")),
                     'loja_produtos_imagens.path as path'
                 )
                 ->where(
-                    ['categoria_id' => $categoriaId,
+                    [
+                        'categoria_id' => $categoriaId,
                         'loja_produtos_new.id' => $produtoId,
                         'loja_categorias.status' => true,
                         'loja_produtos_new.status' => true,
-                        'loja_produtos_variacao.status' => true])->get();
+                        'loja_produtos_variacao.status' => true])
+                ->where('loja_produtos_variacao.quantidade', '>', 0)
+                ->get();
 
-            return view('produto-detalhe-variacoes', ['produtoDetalheVariacoes' => $produtoDetalheVariacoes, 'idCategorigoria' => $categoriaId]);
+
+            return view('produto-detalhe-variacoes', ['produtoDetalheVariacoes' => $produtoDetalheVariacoes, 'idCategoria' => $categoriaId]);
         }
     }
 }

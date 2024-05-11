@@ -13,15 +13,15 @@
                     </ol>
                 </nav>
             </div>
-            <div class="row tm-mb-90 tm-gallery">
+            <div class="row tm-mb-90 tm-gallery ">
                 @foreach($categorias as $categoria)
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                    <div class="gallery-item text-left container-img">
                         <figure class="effect-ming tm-video-item">
-                            <img src="{{URL::asset('../../'.env('ASSET_URL_IMAGE_CATEGORIA_SITE').'/'.$idCategorigoria.'/'.$categoria->imagem)}}" alt="Image" class="img-fluid">
+                            <img src="{{URL::asset('../../'.env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO').'/'.$categoria->id.'/'.$categoria->imagem)}}" alt="Image" class="img-fluid">
                             <figcaption class="d-flex align-items-center justify-content-center">
                                 <h2>{{$categoria->descricao}}</h2>
                                                                                                      <!-- ID CATEGORIA PAI -         ID PRODUTO-->
-                                <a href="#" onclick="postLink('{{ route('produto-detalhe-variacoes')}}' ,{{$idCategorigoria}} ,{{$categoria->id}})"></a>
+                                <a href="#" onclick="postLink('{{ route('produto-detalhe-variacoes')}}' ,{{$idCategoria}} ,{{$categoria->id}})"></a>
                             </figcaption>
                         </figure>
                         <div class="d-flex justify-content-between tm-text-gray">

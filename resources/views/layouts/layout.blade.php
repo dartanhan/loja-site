@@ -77,9 +77,13 @@
 
 <script src="{{URL::asset('js/plugins.js')}}"></script>
 <script src="{{URL::asset('js/scripts.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     $(window).on("load", function() {
         $('body').addClass('loaded');
+        $('[data-toggle="tooltip"]').tooltip();
+
     });
 </script>
 </body>
