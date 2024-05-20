@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Models;
 
 use App\Models\ProdutoVariation1;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +13,8 @@ class ProdutoImagem extends Model
     public $table = 'loja_produtos_imagens';
     protected $fillable = ['produto_variacao_id','path'];
 
-    public function images() {
-        return $this->belongsTo(ProdutoImagem::class);
+    public function images_variacao() {
+        return $this->hasMany(ProdutoVariation::class);
     }
+
 }

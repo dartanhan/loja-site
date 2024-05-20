@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Pedido;
+use App\Models\PedidoProduto;
 use App\Models\Produto;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
 class ProdutoController extends Controller
@@ -20,12 +23,14 @@ class ProdutoController extends Controller
      * @param Request $request
      * @param Produto $produto
      * @param Categoria $categoria
+     * @param Pedido $pedido
      */
-    public function __construct(Request $request, Produto $produto, Categoria $categoria) {
+    public function __construct(Request $request, Produto $produto, Categoria $categoria, Pedido $pedido) {
 
         $this->request = $request;
         $this->produto = $produto;
         $this->categoria = $categoria;
+        $this->pedido = $pedido;
     }
 
    function index(){
@@ -87,7 +92,7 @@ class ProdutoController extends Controller
                     'loja_produtos_variacao.variacao as variacao',
                     'loja_produtos_variacao.quantidade as quantidade',
                     (DB::raw("loja_produtos_variacao.valor_varejo as valor_varejo")),
-                    (DB::raw("loja_produtos_variacao.valor_atacado as valor_atacado")),
+                    (DB::raw("loja_produtos_variacao.valor_atacado_10un as valor_atacado")),
                     //(DB::raw("loja_produtos_variacao.valor_atacado_5un as valor_atacado_5un")),
                     //(DB::raw("loja_produtos_variacao.valor_atacado_10un as valor_atacado_10un")),
                     'loja_produtos_imagens.path as path'

@@ -15,11 +15,13 @@ use App\Http\Controllers\CartController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('index');
-});*/
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::post('/produto-detalhe',[ProdutoController::class,'produto_detalhe'])->name('produto-detalhe');
 Route::post('/produto-detalhe-variacoes',[ProdutoController::class,'produto_detalhe_variacoes'])->name('produto-detalhe-variacoes');
-Route::resource('/',ProdutoController::class);
+//Route::resource('/',ProdutoController::class);
+
+Route::get('/countCart',[CartController::class,'countCart'])->name('countCart');
 Route::resource('/cart',CartController::class);
 

@@ -8,7 +8,8 @@
     <meta name="author" content="KN Cosméticos" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>KN Cosméticos</title>
-    <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet" href="{{URL::asset('css/bootstrap/bootstrap.css')}}">
     <link rel="stylesheet" href="{{URL::asset('fontawesome/css/all.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/templatemo-style.css')}}">
     <!--
@@ -39,10 +40,14 @@
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <!--li class="nav-item">
                     <a class="nav-link nav-link-1 active" aria-current="page" href="index.html">Photos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="videos.html">Videos</a>
                 </li-->
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2" href="{{ route('cart.index') }}" style="position: relative;">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Carrinho
+                        <span class="badge badge-light cart-badge"></span>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link nav-link-3" href="{{route('index')}}">Home</a>
                 </li>
@@ -75,8 +80,13 @@
     @yield('footer')
 </footer>
 
+<script src="{{URL::asset('js/jquery-3.2.1.slim.min.js')}}"></script>
+<script src="{{URL::asset('js/popper.min.js.js')}}"></script>
+<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('js/plugins.js')}}"></script>
+<script src="{{URL::asset('js/url.js')}}"></script>
 <script src="{{URL::asset('js/scripts.js')}}"></script>
+<script src="{{URL::asset('js/http.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
@@ -86,5 +96,6 @@
 
     });
 </script>
+@livewireScripts
 </body>
 </html>

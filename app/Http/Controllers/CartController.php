@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProdutoVariation;
 use App\Models\cart;
+use App\Models\Pedido;
+use App\Models\PedidoProduto;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -16,6 +20,14 @@ use Psr\Container\NotFoundExceptionInterface;
 
 class CartController extends Controller
 {
+
+    public function __construct(Pedido $pedido, ProdutoVariation $produto, PedidoProduto $pedidoProduto)
+    {
+        $this->pedido        = $pedido;
+        $this->produto       = $produto;
+        $this->pedidoProduto = $pedidoProduto;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,11 +35,7 @@ class CartController extends Controller
      */
     public function index()
     {
-
-        $cart = session()->get('cart', []);
-        //$cartItems = Product::whereIn('id', array_keys($cart))->get();
-
-        return view('cart', compact('cart', 'cartItems'));
+        return view('carrinho.index');
 
     }
         /**
@@ -49,24 +57,46 @@ class CartController extends Controller
     public function store(Request $request)
     {
         try {
-            $variacaoId = $request->input('variacao_id');
-            $productId = $request->input('produto_id');
-            $descricao = $request->input('descricao');
-            $image = $request->input('path');
-            $categoriaId =  $request->input('categoria_id');
-            $clienteId =  1;//$request->input('categoria_id');
 
-            $cart = session()->get('cart', []);
-            $cart[$productId] = array(
-                                        'productId' => $productId ,
-                                        'descricao' => $descricao,
-                                        'categoriaId' => $categoriaId,
-                                        'variacaoId' => $variacaoId,
-                                        'clienteId' => $clienteId,
-                                        'image' =>$image);
-            session()->put('cart', $cart);
+            $dataForm = $request->all();
 
-            return Response::json(array('success' => true, 'message' => 'Produto adicionado ao carrinho!'), 200);
+            $variacaoId = $dataForm['variacao_id'];
+            $productId = $dataForm['produto_id'];
+            $descricao = $dataForm['descricao'];
+            $image = $dataForm['path'];
+            $quantidade =  $dataForm['quantidade'];
+            $valor =   $dataForm['valor'];
+            $clienteId =  1;// $user = auth()->user()->id;
+
+            //Verifica se tem pedido para o usuário logado
+            $pedidoId = $this->pedido->consultaPedido([
+                'user_id' => $clienteId,//$dataForm['user_id'],
+                'status'  => 'RE'
+            ]);
+
+            if(empty($pedidoId)):
+
+                $newPedido = $this->pedido->create([
+                    'user_id' =>  $clienteId,//$dataForm['user_id'],
+                    'status'  => 'RE'
+                ]);
+
+                $pedidoId = $newPedido->id;
+
+            endif;
+
+            //Cria o pedido
+            $createPedidoProduto =  $this->pedidoProduto->create([
+                'status'        => 'RE',
+                'valor'         =>  $valor,
+                'produto_id'    =>  $variacaoId,
+                'pedido_id'     =>  $pedidoId,
+                'quantidade'     =>  $quantidade
+            ]);
+
+            if($createPedidoProduto){
+                return Response::json(array('success' => true, 'message' => 'Produto adicionado ao carrinho!'), 200);
+            }
 
         }catch (\Exception $e){
             return Response::json(array('success' => false,'message' => $e->getMessage()), 401);
@@ -120,5 +150,23 @@ class CartController extends Controller
     public function destroy(cart $cr)
     {
         //
+    }
+
+    /**
+     * Retorna o total de itens do carrinho
+     * @param Request $request
+     * @return JsonResponse
+     */
+    function countCart(Request $request){
+        // Obter o parâmetro de consulta 'userId'
+        $userId = $request->input('userId');
+
+        $pedido = Pedido::with('pedido_produto_item')
+            ->withCount('pedido_produto_item')
+            ->where(['user_id' => $userId,'status' => 'RE'])->get();
+
+        $total = $pedido->isEmpty() ? 0 : $pedido[0]->pedido_produto_item_count;
+
+        return Response::json(array('success' => true, 'total' => $total), 200);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -14,11 +14,18 @@ class ProdutoVariation extends Model
     protected $fillable = ['id','products_id','subcodigo','variacao','valor_varejo','valor_atacado','valor_atacado_5un','valor_atacado_10un','valor_lista','valor_produto'
                             ,'percentage','quantidade','quantidade_minima','status','validade','created_at','fornecedor','estoque'];
 
-    public function variations() {
-        return $this->belongsTo(ProdutoVariation::class);
+//    public function variations() {
+//        return $this->belongsTo(ProdutoVariation::class);
+//    }
+
+    public function produto_variacao_image()
+    {
+        return $this->belongsTo(ProdutoImagem::class, 'id', 'produto_variacao_id');
     }
 
-    function images(){
-        return  $this->hasMany(ProdutoImagem::class ,'produto_variacao_id','id');
+    // Definir o relacionamento com Produto
+    public function produto()
+    {
+        return $this->belongsTo(Produto::class, 'products_id');
     }
 }

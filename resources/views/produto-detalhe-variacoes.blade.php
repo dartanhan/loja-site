@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+
         @if(count($produtoDetalheVariacoes) >0)
           <div class="container-fluid tm-container-content tm-mt-60">
                 <div class="row mb-4">
@@ -16,7 +17,7 @@
                 </div>
 
               <div class="row tm-mb-90 tm-gallery gallery">
-{{$produtoDetalheVariacoes}}
+
                   @foreach($produtoDetalheVariacoes as $variacao)
 
                       <div class="gallery-item text-left container-img">
@@ -87,10 +88,10 @@
                                           class="btn btn-primary btn-sm addCart"
                                           data-variacao_id="{{$variacao->variacao_id}}"
                                           data-produto_id="{{$variacao->produto_id}}"
-                                          data-categoria_id="{{$variacao->categoria_id}}"
                                           data-descricao="{{$variacao->descricao}} - {{$variacao->variacao}}"
                                           data-path="{{$variacao->path}}"
-                                          data-quantidade="{{$variacao->quantidade}}"
+                                          data-valor_varejo="{{$variacao->valor_varejo}}"
+                                          data-valor_atacado="{{$variacao->valor_atacado}}"
                                           data-action="{{route('cart.index')}}">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
                                               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
@@ -109,7 +110,7 @@
             <div class="container not-found">
                 <h1>Ops! Produto não encontrado</h1>
                 <p>Lamentamos, mas o produto que você está procurando não foi encontrado.</p>
-                <p><a href="#" onclick="postLink('{{ route('produto-detalhe')}}' ,{{$idCategorigoria}})">Voltar para a página anterior</a></p>
+                <p><a href="#" onclick="postLink('{{ route('produto-detalhe')}}' ,{{$idCategoria}})">Voltar para a página anterior</a></p>
                 <img src="{{URL::asset('img/logo.png')}}" alt="Produto Não Encontrado" class="img-fluid">
 
             </div>

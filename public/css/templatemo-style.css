@@ -903,3 +903,56 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+/* Estilo para o cabeçalho da tabela com fundo escuro */
+.thead-rose {
+    background-color: #d3448b;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    text-align: center;
+}
+
+.table thead-rose th {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+    padding: 0.75rem;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 2px solid #454d55;
+}
+
+.table thead-rose th:first-child {
+    border-top-left-radius: 0.3rem;
+}
+
+.table thead-rose th:last-child {
+    border-top-right-radius: 0.3rem;
+}
+/* Estilo para o corpo da tabela */
+.table tbody td {
+    vertical-align: middle; /* Alinhamento vertical ao meio */
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+/* Estilo para posicionar o badge sobre o ícone do carrinho */
+.cart-badge {
+    position: absolute;
+    top: -5px; /* Ajuste essa propriedade conforme necessário */
+    right: 70px; /* Ajuste essa propriedade conforme necessário */
+    background-color: red; /* Cor de fundo do badge */
+    color: white; /* Cor do texto do badge */
+    padding: 5px 10px; /* Padding do badge */
+    border-radius: 50%; /* Faz o badge ser redondo */
+    font-size: 0.75rem; /* Tamanho do texto do badge */
+}
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+.disabled i {
+    color: #ccc; /* Ou qualquer outra cor para indicar que está desabilitado */
+}

@@ -12,5 +12,9 @@ class Produto extends Model
     public $table = 'loja_produtos_new';
     protected $fillable = [];
 
-
+    // Definir o relacionamento com ProdutoVariacao
+    public function variacoes()
+    {
+        return $this->hasMany(ProdutoVariation::class, 'products_id');
+    }
 }

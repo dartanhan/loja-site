@@ -32,64 +32,82 @@ function postLink(url, categoria_id, produto_id) {
 
 
 $(document).ready(function() {
+// Seleciona o elemento <meta> pelo atributo name
+    let csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
 
     $(document).on("click", ".addCart", function(event){
         event.preventDefault();
 
-        // Seleciona o elemento <meta> pelo atributo name
-        let csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
         let variacao_id =  $(this).data('variacao_id');
         let produto_id =  $(this).data('produto_id');
-        let categoria_id =  $(this).data('categoria_id');
+        let valor_varejo =  $(this).data('valor_varejo');
+        let valor_atacado =  $(this).data('valor_atacado');
         let descricao =  $(this).data('descricao');
         let path =  $(this).data('path');
         let action =  $(this).data('action');
         let quantidade = +$('#quantidade-produto-'+variacao_id).val();// Usando jQuery para pegar o valor do input e converter para inteiro
 
-        console.log(variacao_id,quantidade);
-return false;
-        $.ajax({
-            url: fncUrl() + "/cart/", //product.store
-            cache: false,
-            type:'post',
-            data:{ // Objeto de dados que você deseja enviar
-                variacao_id: variacao_id, // Informação adicional que você quer passar
-                produto_id: produto_id,
-                categoria_id: categoria_id,
-                descricao: descricao,
-                path: path,
-                action: action,
-                _token: csrfTokenMeta
-            },
-            dataType:'json',
-            success: function(response){
-                 console.log(response);
-                 return false;
-                Swal.fire({
-                    title: 'Atualizado!',
-                    text: response.message,
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                table.destroy();
-                getdata();
-            },
-            error:function(response){
-                // console.log(response);
-                swalWithBootstrapButtons.fire({
-                    title: 'Error!',
-                    text: response.message,
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+       let jsonBody =  JSON.stringify(
+            {
+                variacao_id: variacao_id,
+                produto_id: produto_id ,
+                quantidade:quantidade,
+                path:path,
+                descricao:descricao,
+                valor: (quantidade >= 5) ?  valor_atacado : valor_varejo
             }
-        });
+        )
+        //faz a requisção post
+        fetchPost(csrfTokenMeta,jsonBody,action, 'alert');
+        loadCountItemCart();
     });
 
+    /***
+     *
+     * */
+    let loadCountItemCart = function(user_id =1){
 
+        // Uso da função
+        (async () => {
+            let params = { userId: user_id };
+            let data = await fetchGet("http://127.0.0.1/site-loja/countCart", params);
+            if (data) {
+                // Faça algo com os dados retornados
+                //console.log(data.total);
+                $('.cart-badge').text(data.total);
+            } else {
+                // Manipular o caso de erro, se necessário
+                console.log('A função fetchGet falhou.');
+            }
+        })();
+    }
+
+
+
+    Livewire.on('postAdded', postId => {
+        alert('A post was added with the id of: ' + postId);
+    })
+
+    /***
+     *
+     * */
+    loadCountItemCart();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    window.livewire.on('mensagem', (data) => {
+        Swal.fire({
+            position: "top-end",
+            icon: data.icon,
+            title: data.titulo ,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+});
+
+
+
 /***
  *  *** AÇÃO DE QUANTIDADE
  * */
