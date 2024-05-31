@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CartController;
+use App\Http\Livewire\Category;
+use App\Http\Livewire\ProdutoDetalhe;
+use App\Http\Livewire\ProdutoDetalheVariacoes;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +19,21 @@ use App\Http\Controllers\CartController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', Category::class)->name('index');
+Route::post('/produto-detalhe',ProdutoDetalhe::class)->name('produto-detalhe');
+Route::post('/produto-detalhe-variacoes',ProdutoDetalheVariacoes::class)->name('produto-detalhe-variacoes');
+
+//Route::post('/produto-detalhe',[ProdutoController::class,'produto_detalhe'])->name('produto-detalhe');
+//Route::post('/produto-detalhe-variacoes',[ProdutoController::class,'produto_detalhe_variacoes'])->name('produto-detalhe-variacoes');
+Route::resource('/produto',ProdutoController::class);
+
+
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/countCart', [CartController::class, 'countCart'])->name('countCart');
+    Route::resource('/cart', CartController::class);
 });
-Route::post('/produto-detalhe',[ProdutoController::class,'produto_detalhe'])->name('produto-detalhe');
-Route::post('/produto-detalhe-variacoes',[ProdutoController::class,'produto_detalhe_variacoes'])->name('produto-detalhe-variacoes');
-//Route::resource('/',ProdutoController::class);
 
-Route::get('/countCart',[CartController::class,'countCart'])->name('countCart');
-Route::resource('/cart',CartController::class);
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

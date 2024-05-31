@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:livewire="">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,48 +29,8 @@
     <div class="loader-section section-right"></div>
 
 </div>
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <i class="fas fa-shopping-bag mr-2"></i>
-            Catálogo KN Cosméticos
-        </a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <!--li class="nav-item">
-                    <a class="nav-link nav-link-1 active" aria-current="page" href="index.html">Photos</a>
-                </li-->
-                <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="{{ route('cart.index') }}" style="position: relative;">
-                        <i class="fas fa-shopping-cart mr-2"></i>
-                        Carrinho
-                        <span class="badge badge-light cart-badge"></span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-3" href="{{route('index')}}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link nav-link-4" href="#">Contato</a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</nav>
-
-<div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll">
-    <div class="logo-container">
-        <a href="{{route('index')}}">
-            <img src="{{URL::asset('img/logo.png')}}" alt="Logo" class="img-fluid">
-        </a>
-    </div>
-    <div class="text text-center mt-3">
-        <h3>KN COSMÉTICOS</h3>
-        <p>TUDO QUE UMA LASH PRECISA</p>
-    </div>
-</div>
+@yield('header')
 
 <div class="container-fluid tm-container-content tm-mt-60">
     @yield('content')
@@ -82,13 +42,17 @@
 
 <script src="{{URL::asset('js/jquery-3.2.1.slim.min.js')}}"></script>
 <script src="{{URL::asset('js/popper.min.js.js')}}"></script>
-<script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('js/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('js/plugins.js')}}"></script>
 <script src="{{URL::asset('js/url.js')}}"></script>
 <script src="{{URL::asset('js/scripts.js')}}"></script>
 <script src="{{URL::asset('js/http.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- JQuery -->
 
+
+<!-- Bootstrap Bundle JS -->
+<script src="{{URL::asset('js/bootstrap/bootstrap.bundle.js')}}"></script>
 <script>
     $(window).on("load", function() {
         $('body').addClass('loaded');

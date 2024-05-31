@@ -48,6 +48,7 @@ let fetchPost = function(csrfTokenMeta, jsonBody,action, tipoRetorno){
     })
         .then(response => {
             if (!response.ok) {
+                console.log(response);
                 throw new Error('Erro ao excutar função!');
             }
             return response.json();
@@ -68,7 +69,7 @@ let fetchPost = function(csrfTokenMeta, jsonBody,action, tipoRetorno){
             }
         })
         .catch(error => {
-            //  console.error('Erro ao adicionar ao carrinho:', error);
+              console.error('Erro ao adicionar ao carrinho:', error);
             Swal.fire({
                 position: "top-end",
                 icon: "error",

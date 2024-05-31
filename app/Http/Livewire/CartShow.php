@@ -10,7 +10,13 @@ class CartShow extends Component
 {
     public $pedidos, $mensagem_erro;
 
-    protected $listeners = ['postAdded' =>'postAdded'];
+    protected $listeners = ['removeItemToCart','removeItemToCart'];
+
+    public function mount(){
+      // $this-> loadPedidos();
+    //   $this->emit('getCountItemCart', $this->getCountItemCart());
+
+    }
 
     private function validaQtd(int $idPedidoItem){
         $this->pedidos = Pedido::join("loja_pedido_produtos as pp", "loja_pedidos.id", "=", "pp.pedido_id")
@@ -20,7 +26,7 @@ class CartShow extends Component
                 "pp.quantidade as quantidadeItem")
             ->where([
                 'loja_pedidos.status'  => 'RE',
-                'loja_pedidos.user_id' => 1,
+                'loja_pedidos.user_id' => auth()->user()->id,
                 'pp.id' => $idPedidoItem//auth()->user()->id
             ])->first();
         return $this->pedidos;
@@ -28,7 +34,8 @@ class CartShow extends Component
 
     /**
      * Decrementa a quantidde no carrinho
-    */
+     * @param int $idPedidoItem
+     */
     public function decrementQuantity(int $idPedidoItem){
 
         $item = PedidoProduto::find($idPedidoItem);
@@ -42,42 +49,85 @@ class CartShow extends Component
         }
 
     }
+
     /**
-     * Incrementa a quantidade no carrinho
-    */
-    public function incrementQuantity(int $idPedidoItem){
-        $retorno = $this->validaQtd($idPedidoItem);
+     * PErgunta se deseja remover o ítem
+     * @param $pedidoProdutoId
+     */
+    public function confirmRemoveItem($pedidoProdutoId)
+    {
+        $this->emit('confirmRemoveItem', $pedidoProdutoId);
+    }
 
-        if($retorno->quantidadeItem > $retorno->qtdTotalProduto){
-            $this->emit("mensagem", [
-                'titulo' => 'Quantidade solicitada acima do estoque!',
-                'icon' => 'error'
-            ]);
-            return false;
-        }
-
+    public function removeItemToCart(int $idPedidoItem){
         $item = PedidoProduto::find($idPedidoItem);
         if ($item) {
-            $item->quantidade++;
-            $item->save();
-
-            $this->emit('mensagem', [
-                                            'titulo' => 'Quantidade atualizada com sucesso!',
-                                            'icon' => 'success']);
+            $item->delete();
         }
+
+        $this->emit('mensagem', [
+            'titulo' => 'Produto removido com sucesso!',
+            'icon' => 'success']);
+    }
+
+    /**
+     * Incrementa a quantidade no carrinho
+     * @param int $idPedidoItem
+     * @return bool
+     */
+    public function incrementQuantity(int $idPedidoItem){
+        if(auth()->check()) {
+
+            $retorno = $this->validaQtd($idPedidoItem);
+
+            if ($retorno->quantidadeItem > $retorno->qtdTotalProduto) {
+                $this->emit("mensagem", [
+                    'titulo' => 'Quantidade solicitada acima do estoque!',
+                    'icon' => 'error'
+                ]);
+                return false;
+            }
+
+            $item = PedidoProduto::find($idPedidoItem);
+            if ($item) {
+                $item->quantidade++;
+                $item->save();
+
+                $this->emit('mensagem', [
+                    'titulo' => 'Quantidade atualizada com sucesso!',
+                    'icon' => 'success']);
+            }
+        }else{
+            return redirect('../login');// Redireciona para a rota de login
+        }
+    }
+
+
+
+    /**
+    * Busca os íntens do carrinho
+     */
+    public function loadPedidos()
+    {
+        $this->pedidos = Pedido::with(['pedido_produto_item.produto_variacao.imagens','pedido_produto_item.produto_variacao.produto'])
+            ->where([
+                'status'  => 'RE',
+                'user_id' => auth()->user()->id
+            ])->get();
+
+        // atualiza a quantidade no carrinho
+        $this->emit('checkCartCount');
     }
 
     public function render()
     {
-        $this->pedidos = Pedido::with(['pedido_produto_item.produto_variacao.produto_variacao_image','pedido_produto_item.produto_variacao.produto'])
-            ->where([
-                'status'  => 'RE',
-                'user_id' => 1//auth()->user()->id
-            ])->get();
-
-        return view('livewire.cart-show',
+        $this-> loadPedidos();
+        return view('livewire.cart.cart-show',
             [
-                'pedidos' => $this->pedidos
-            ]);
+            'pedidos' => $this->pedidos
+            ]
+        );
+
     }
+
 }

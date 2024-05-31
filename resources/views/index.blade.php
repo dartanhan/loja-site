@@ -1,8 +1,11 @@
-@extends('layouts.layout')
+{{--@extends('layouts.layout')--}}
+
+@section('header')
+    @include('header')
+@endsection
 
 
-
-@section('content')
+{{--@section('content')--}}
 
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
@@ -44,7 +47,7 @@
         </div-->
     </div> <!-- container-fluid, tm-container-content -->
 
-@endsection
+{{--@endsection--}}
 @section('footer')
     @include('footer')
 @endsection

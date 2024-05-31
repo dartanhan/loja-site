@@ -11,4 +11,10 @@ class Categoria extends Model
     public $table = 'loja_categorias';
     protected $fillable = [];
 
+    // Definir o relacionamento com Produto
+    public function produto()
+    {
+        return $this->hasMany(Produto::class, 'categoria_id');
+    }
+
 }

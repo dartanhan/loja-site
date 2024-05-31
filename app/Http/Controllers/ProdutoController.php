@@ -36,7 +36,25 @@ class ProdutoController extends Controller
    function index(){
 
        //$produtos = $this->produto->all();
-       $categorias = $this->categoria->where('status',true)->get();
+      // $categorias = $this->categoria->where('status',true)->get();
+
+       // Carrega as categorias que têm pelo menos um produto ativo com imagens associadas
+       // Carrega as categorias que têm pelo menos um produto ativo com variações e imagens associadas
+       $categorias = Categoria::where('status', true) // Categoria ativa
+       ->whereHas('produto', function ($query) {
+           $query->where('status', true) // Produto ativo
+           ->whereHas('variacoes', function ($query) {
+               $query->has('imagens');
+           });
+       })
+           ->with(['produto' => function($query) {
+               $query->where('status', true) // Produto ativo
+               ->whereHas('variacoes', function ($query) {
+                   $query->has('imagens');
+               });
+           }, 'produto.variacoes.imagens'])
+           ->get();
+
 
        return view('index', compact('categorias'));
    }
@@ -47,16 +65,21 @@ class ProdutoController extends Controller
      * @return Application|Factory|View
      */
    function produto_detalhe(Request $request){
-
        $categoriaId = $request->input('categoria_id');
 
-       $categorias = $this->categoria
-           ->Join('loja_produtos_new','loja_categorias.id','=' ,'loja_produtos_new.categoria_id')
-           ->where(['categoria_id' => $categoriaId,
-               'loja_categorias.status' => true,
-               'loja_produtos_new.status' => true])->get();
+       // Carrega as categorias com os produtos que têm imagens associadas e com status ativo
+       $categorias = Categoria::where('id', $categoriaId)
+           ->where('status', true) // Categoria ativa
+           ->with(['produto' => function($query) {
+               $query->where('status', true) // Produto ativo
+               ->whereHas('imagens') // Produto com imagens
+               ->with(['variacoes' => function($query) {
+                   $query->has('imagens'); // Variação com imagens
+               }, 'imagens']); // Inclui as imagens do produto
+           }, 'produto.variacoes.imagens']) // Inclui as imagens das variações
+           ->first();
 
-       return view('produto-detalhe',['categorias'=>$categorias, 'idCategoria' => $categoriaId]);
+       return view('produto-detalhe',['categorias'=>$categorias]);
    }
 
     /***
@@ -108,7 +131,7 @@ class ProdutoController extends Controller
                 ->get();
 
 
-            return view('produto-detalhe-variacoes', ['produtoDetalheVariacoes' => $produtoDetalheVariacoes, 'idCategoria' => $categoriaId]);
+            return view('produto-detalhe-variacoes', ['produtoDetalheVariacoes' => $produtoDetalheVariacoes, 'categoriaId' =>$categoriaId]);
         }
     }
 }

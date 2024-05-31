@@ -18,7 +18,7 @@ class ProdutoVariation extends Model
 //        return $this->belongsTo(ProdutoVariation::class);
 //    }
 
-    public function produto_variacao_image()
+    public function imagens()
     {
         return $this->belongsTo(ProdutoImagem::class, 'id', 'produto_variacao_id');
     }
@@ -28,4 +28,5 @@ class ProdutoVariation extends Model
     {
         return $this->belongsTo(Produto::class, 'products_id');
     }
+
 }

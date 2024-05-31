@@ -1,15 +1,13 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
-    <div class="container-fluid tm-container-content tm-mt-60">
-        <div class="row">
+
+
             @if(count($pedidos) > 0)
                 <div class="card">
                     <h5 class="card-header">Produtos do carrinho - Pedido : {{ $pedidos[0]->id}} - Criado em :  {{ $pedidos[0]->created_at->format('d/m/Y H:i')}}</h5>
                     <div class="card-body">
-
-                        @foreach ($pedidos as $pedido)
-                            <div class="row">
-                                <table class="table table-hover table-striped">
-                                    <thead class="thead-rose">
+                        <div class="row">
+                            <table class="table table-hover table-striped table-responsive-lg">
+                                <thead class="thead-rose">
                                     <tr>
                                         <th scope="col">Imagem</th>
                                         <th scope="col">Produto</th>
@@ -18,18 +16,20 @@
                                         <th scope="col">Desconto(s)</th>
                                         <th scope="col">SubTotal</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
+                                </thead>
+                                <tbody>
+                                    @foreach ($pedidos as $pedido)
+
                                     @php
                                         $total_pedido = 0;
                                     @endphp
 
                                     @foreach ($pedido->pedido_produto_item as $pedidosProdutos )
-                                        {{$pedidosProdutos->produto_variacao->quantidade}}
+
                                         <tr>
                                             <td>
-                                                @if(!is_null($pedidosProdutos->produto_variacao->produto_variacao_image))
-                                                    <img src="{{URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO_SITE').'/'.$pedidosProdutos->produto_variacao->produto_variacao_image->path)}}"
+                                                @if(!is_null($pedidosProdutos->produto_variacao->imagens))
+                                                    <img src="{{URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO_SITE').'/'.$pedidosProdutos->produto_variacao->imagens->path)}}"
                                                          width="80px" height="80px"
                                                          title="{{ $pedidosProdutos->produto_variacao->produto->descricao }} - {{ $pedidosProdutos->produto_variacao->variacao }}"
                                                          data-toggle="tooltip"/>
@@ -43,27 +43,37 @@
                                             <td>
                                                 {{ $pedidosProdutos->produto_variacao->produto->descricao }} - {{ $pedidosProdutos->produto_variacao->variacao }}
                                             </td>
-                                            <td scope="row">
+                                            <td>
+                                                <span>
                                                 @if($pedidosProdutos->quantidade > 1)
-                                                    <a href="#" wire:click.prevent="decrementQuantity({{ $pedidosProdutos->id }})">
+                                                    <a href="#" title="Remover Item" data-toggle="tooltip" wire:click.prevent="decrementQuantity({{ $pedidosProdutos->id }})">
                                                         <i class="fa fa-minus-circle" aria-hidden="true"></i>
                                                     </a>
                                                 @else
                                                     <a href="#" class="disabled">
-                                                        <i class="fa fa-minus-circle" aria-hidden="true" style="color: #ccc;"></i>
+                                                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
                                                     </a>
                                                 @endif
-                                                <span class="col-lg-4">{{ $pedidosProdutos->quantidade }}</span>
+                                                <span class="col-md-1">{{ $pedidosProdutos->quantidade }}</span>
 
                                                     @if($pedidosProdutos->quantidade == $pedidosProdutos->produto_variacao->quantidade)
                                                         <a href="#" class="disabled">
-                                                            <i class="fa fa-plus-circle" aria-hidden="true" style="color: #ccc;"></i>
+                                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                                         </a>
                                                     @else
-                                                        <a href="#"  wire:click.prevent="incrementQuantity({{$pedidosProdutos->id}})">
+                                                        <a href="#" title="Adicionar Item" data-toggle="tooltip"
+                                                            wire:click.prevent="incrementQuantity({{$pedidosProdutos->id}})">
                                                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                                         </a>
                                                     @endif
+                                                    </span>
+                                                <span class="col-md-1">
+                                                    <a href="#" title="Excluir Item" data-toggle="tooltip"
+                                                        wire:click.prevent="confirmRemoveItem({{$pedidosProdutos->id}})">
+                                                        <i class="fa fa-trash-alt text-danger" aria-hidden="true"></i>
+                                                    </a>
+                                                    </span>
+
                                             </td>
                                             <td>
                                                 R$ {{number_format($pedidosProdutos->valor, 2, ',', '.')}}
@@ -81,7 +91,7 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                    </tbody>
+                                </tbody>
                                 </table>
                                 <hr>
                                 <div class="col-lg-4">
@@ -115,6 +125,6 @@
                 </div>
 
             @endif
-        </div>
-    </div>
+
+
 </div>

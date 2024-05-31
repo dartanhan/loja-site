@@ -154,21 +154,22 @@ a:hover { color: #d4468c; }
 .container-fluid { max-width: 1770px; }
 .tm-container-small { max-width: 1050px; }
 .btn { border-radius: 0; }
-.btn-primary {
+.btn-custom {
     background-color: #a91657;
     border: 0;
     border-radius: 5px;
     padding: 5px 10px 4px;
     font-size: 1.1rem;
+    color: white;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-custom:hover,
+.btn-custom:focus {
     background-color:#ec8aa7;
 }
 
-.btn-primary.disabled,
-.btn-primary:disabled {
+.btn-custom.disabled,
+.btn-custom:disabled {
     background-color: #a91657;
     pointer-events: all;
     cursor: not-allowed;
@@ -771,7 +772,7 @@ select:not([multiple]) {
 
 .container-img{
     max-width: 400px;
-    max-height: 600px;
+    max-height: 650px;
     width: auto;
     height: auto;
     overflow: hidden;

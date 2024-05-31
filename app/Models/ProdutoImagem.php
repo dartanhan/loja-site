@@ -17,4 +17,8 @@ class ProdutoImagem extends Model
         return $this->hasMany(ProdutoVariation::class);
     }
 
+    public function produto()
+    {
+        return $this->belongsTo(Produto::class, 'produto_id');
+    }
 }

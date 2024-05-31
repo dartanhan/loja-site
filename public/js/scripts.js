@@ -30,72 +30,66 @@ function postLink(url, categoria_id, produto_id) {
     form.submit();
 }
 
+function addToCart(variacaoId, produtoId, valorVarejo, valorAtacado) {
+    let quantityElement = document.getElementById('quantidade-produto-' + variacaoId);
+    let quantityTotal = parseInt(quantityElement.getAttribute('quantitytotal'));
+    let quantity = parseInt(quantityElement.value);
+
+    // Disparar evento Livewire com os valores necessários
+    Livewire.emit('addCart', variacaoId, produtoId, valorVarejo, valorAtacado, quantityTotal, quantity);
+}
 
 $(document).ready(function() {
+
 // Seleciona o elemento <meta> pelo atributo name
-    let csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+   // let csrfTokenMeta = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    $(document).on("click", ".addCart", function(event){
-        event.preventDefault();
+    // $(document).on("click", "addCart", function(event){
+    //     event.preventDefault();
+    //
+    //     let variacao_id =  $(this).data('variacao_id');
+    //     let produto_id =  $(this).data('produto_id');
+    //     let valor_varejo =  $(this).data('valor_varejo');
+    //     let valor_atacado =  $(this).data('valor_atacado');
+    //     let quantidadeTotal =  $(this).data('quantityTotal');
+    //     let quantidade = +$('#quantidade-produto-'+variacao_id).val();// Usando jQuery para pegar o valor do input e converter para inteiro
+    //
+    //     // Chamar a função Livewire passando os parâmetros
+    //     Livewire.emit('addCart', variacao_id, produto_id,valor_varejo, valor_atacado, quantidadeTotal,quantidade);
+    //
+    // });
 
-        let variacao_id =  $(this).data('variacao_id');
-        let produto_id =  $(this).data('produto_id');
-        let valor_varejo =  $(this).data('valor_varejo');
-        let valor_atacado =  $(this).data('valor_atacado');
-        let descricao =  $(this).data('descricao');
-        let path =  $(this).data('path');
-        let action =  $(this).data('action');
-        let quantidade = +$('#quantidade-produto-'+variacao_id).val();// Usando jQuery para pegar o valor do input e converter para inteiro
 
-       let jsonBody =  JSON.stringify(
-            {
-                variacao_id: variacao_id,
-                produto_id: produto_id ,
-                quantidade:quantidade,
-                path:path,
-                descricao:descricao,
-                valor: (quantidade >= 5) ?  valor_atacado : valor_varejo
+    /**
+     * Exibe mesnsagem confirmação de exclusão de produto do carrinho
+     * Caso sim, chama função no componente CartShow.php para exclusão
+     * */
+    Livewire.on('confirmRemoveItem', pedidoProdutoId => {
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Deseja mesmo remover este item?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, remover!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Livewire.emit('removeItemToCart', pedidoProdutoId);
+
             }
-        )
-        //faz a requisção post
-        fetchPost(csrfTokenMeta,jsonBody,action, 'alert');
-        loadCountItemCart();
+        });
     });
 
     /***
      *
      * */
-    let loadCountItemCart = function(user_id =1){
-
-        // Uso da função
-        (async () => {
-            let params = { userId: user_id };
-            let data = await fetchGet("http://127.0.0.1/site-loja/countCart", params);
-            if (data) {
-                // Faça algo com os dados retornados
-                //console.log(data.total);
-                $('.cart-badge').text(data.total);
-            } else {
-                // Manipular o caso de erro, se necessário
-                console.log('A função fetchGet falhou.');
-            }
-        })();
-    }
-
-
-
-    Livewire.on('postAdded', postId => {
-        alert('A post was added with the id of: ' + postId);
-    })
-
-    /***
-     *
-     * */
-    loadCountItemCart();
+   // loadCountItemCart();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    window.livewire.on('mensagem', (data) => {
+document.addEventListener('livewire:load', function () {
+    Livewire.on('mensagem', (data) => {
         Swal.fire({
             position: "top-end",
             icon: data.icon,
