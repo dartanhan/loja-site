@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Category;
 use App\Http\Livewire\ProdutoDetalhe;
 use App\Http\Livewire\ProdutoDetalheVariacoes;
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,9 @@ use App\Http\Livewire\ProdutoDetalheVariacoes;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [HomeController::class,'index'])->name('index');
 
-Route::get('/', Category::class)->name('index');
+Route::get('/category', Category::class)->name('index');
 Route::post('/produto-detalhe',ProdutoDetalhe::class)->name('produto-detalhe');
 Route::post('/produto-detalhe-variacoes',ProdutoDetalheVariacoes::class)->name('produto-detalhe-variacoes');
 

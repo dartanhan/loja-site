@@ -1,0 +1,11 @@
+adicionar na pasta storage as pastas :
+    app
+        public
+            categorias
+            product
+            produtos
+    framework
+        cache
+        sessions
+        views
+    logs
