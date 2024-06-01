@@ -13,8 +13,6 @@ class CartShow extends Component
     protected $listeners = ['removeItemToCart','removeItemToCart'];
 
     public function mount(){
-      // $this-> loadPedidos();
-    //   $this->emit('getCountItemCart', $this->getCountItemCart());
 
     }
 
@@ -60,7 +58,8 @@ class CartShow extends Component
     }
 
     public function removeItemToCart(int $idPedidoItem){
-        $item = PedidoProduto::find($idPedidoItem);
+        $item = PedidoProduto::with('pedido')->findOrFail($idPedidoItem);
+     
         if ($item) {
             $item->delete();
         }
@@ -115,12 +114,13 @@ class CartShow extends Component
                 'user_id' => auth()->user()->id
             ])->get();
 
-        // atualiza a quantidade no carrinho
-        $this->emit('checkCartCount');
+        
     }
 
     public function render()
     {
+        // atualiza a quantidade no carrinho
+        $this->emit('checkCartCount');
         $this-> loadPedidos();
         return view('livewire.cart.cart-show',
             [

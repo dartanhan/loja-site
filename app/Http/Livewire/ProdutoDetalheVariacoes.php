@@ -23,6 +23,7 @@ class ProdutoDetalheVariacoes extends Component
 
     public function mount(Request $request){
         $this->request = $request->all();
+        
     }
 
     /***
@@ -91,7 +92,8 @@ class ProdutoDetalheVariacoes extends Component
             $response = $this->addCartTrait($data);
 
             $this->emit('mensagem', ['titulo' =>$response['message'],'icon' => $response['icon']]);
-
+            // atualiza a quantidade no carrinho
+            $this->emit('checkCartCount');
 
         }else{
             return redirect('../login');// Redireciona para a rota de login

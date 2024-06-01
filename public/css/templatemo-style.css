@@ -175,6 +175,27 @@ a:hover { color: #d4468c; }
     cursor: not-allowed;
 }
 
+.btn-cart-view  {
+    background-color: #167aa9;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px 10px 4px;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.btn-cart-view:hover,
+.btn-cart-view:focus {
+    background-color:#ec8aa7;
+}
+
+.btn-cart-view .disabled,
+.btn-cart-view:disabled {
+    background-color: #a91657;
+    pointer-events: all;
+    cursor: not-allowed;
+}
+
 .form-control {
 	padding: 10px 20px;
 	width: 100%;

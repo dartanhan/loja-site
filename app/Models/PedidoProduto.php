@@ -17,4 +17,24 @@ class PedidoProduto extends Model
     {
         return $this->belongsTo(ProdutoVariation::class, 'produto_id', 'id');
     }
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function ($itemPedido) {
+          
+            $pedido = $itemPedido->pedido;
+
+            // Verifica se o pedido não tem mais itens
+            if ($pedido->pedido_produto_item()->count() == 0) {
+                $pedido->delete();
+            }
+        });
+    }
 }

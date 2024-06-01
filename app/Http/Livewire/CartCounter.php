@@ -6,12 +6,18 @@ use App\Models\Pedido;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
+use function PHPUnit\Framework\isNull;
+
 class CartCounter extends Component
 {
     public $totalCart =0;
     public $pedidos;
 
     protected $listeners = ['checkCartCount','checkCartCount'];
+
+    public function mount(){
+        $this->totalCart = $this->checkCartCount();
+    }
 
     public function checkCartCount(){
         if(Auth::check()){
@@ -20,8 +26,13 @@ class CartCounter extends Component
                     'status'  => 'RE',
                     'user_id' => auth()->user()->id
                 ])->get();
-
-            return $this->pedidos[0]['pedido_produto_item']->count();
+            
+                $this->totalCart =0;
+                if(!empty($this->pedidos[0]['pedido_produto_item'])){
+                    $this->totalCart = $this->pedidos[0]['pedido_produto_item']->count();
+                }
+                
+                return $this->totalCart;
         }else{
             return $this->totalCart;
         }

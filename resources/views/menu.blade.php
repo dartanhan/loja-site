@@ -8,7 +8,7 @@
             <a class="nav-link nav-link-2" href="{{ route('cart.index') }}" style="position: relative;">
                 <i class="fas fa-shopping-cart mr-2"></i>
                 Carrinho
-                <span class="badge badge-light cart-badge"><livewire:cart-counter/></span>
+                <span class="badge badge-light cart-badge"><livewire:cart-counter /></span>
             </a>
         </li>
         <li class="nav-item">
