@@ -926,6 +926,9 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+.bg-rose{
+    background-color: #d3448b;
+}
 /* Estilo para o cabeçalho da tabela com fundo escuro */
 .thead-rose {
     background-color: #d3448b;

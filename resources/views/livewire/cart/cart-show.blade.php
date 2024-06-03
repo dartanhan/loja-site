@@ -1,17 +1,16 @@
 <div xmlns:wire="http://www.w3.org/1999/xhtml">
     @if(count($pedidos) > 0)
         <div class="card">
-            <h5 class="card-header">Produtos no Carrinho</h5>
+            <h5 class="card-header"><i class="fas fa-shopping-bag mr-2"></i> KN Cosméticos | Carrinho de Compras</h5>
             <div class="card-body">
                 <div class="row">
                     <!-- Tabela de Itens -->
                     <div class="col-lg-8 mb-3">
-                        <div class="card">
+                        <div>
                             <table class="table table-hover table-striped table-responsive-lg">
                                 <thead class="thead-rose">
                                     <tr>
-                                        <th scope="col">Imagem</th>
-                                        <th scope="col">Produto</th>
+                                        <th scope="col" colspan="2"></th>
                                         <th scope="col">Qtd</th>
                                         <th scope="col">Valor Unit.</th>
                                         <th scope="col">Desconto(s)</th>
@@ -21,22 +20,25 @@
                                 <tbody>
                                     @foreach ($pedidos as $pedido)
                                         @php $total_pedido = 0; @endphp
+                                        @php $sub_total = 0; @endphp
+                                        @php $total_descontos = 0; @endphp
+
+
                                         @foreach ($pedido->pedido_produto_item as $pedidosProdutos)
                                             <tr>
-                                                <td>
+                                                <td colspan="2" class="text-left">
                                                     @if(!is_null($pedidosProdutos->produto_variacao->imagens))
                                                         <img src="{{ URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO_SITE') . '/' . $pedidosProdutos->produto_variacao->imagens->path) }}"
                                                             width="80px" height="80px"
                                                             title="{{ $pedidosProdutos->produto_variacao->produto->descricao }} - {{ $pedidosProdutos->produto_variacao->variacao }}"
-                                                            data-toggle="tooltip"/>
-                                                    @else
-                                                        <img src="{{ URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO_SITE') . '/not-image.png') }}"
-                                                            width="50px" height="50px"
-                                                            title="{{ $pedidosProdutos->produto_variacao->produto->descricao }} - {{ $pedidosProdutos->produto_variacao->variacao }}"
-                                                            data-toggle="tooltip"/>
+                                                            data-toggle="tooltip"/>&nbsp;&nbsp;  {{ $pedidosProdutos->produto_variacao->produto->descricao }} - {{ $pedidosProdutos->produto_variacao->variacao }}
+{{--                                                    @else--}}
+{{--                                                        <img src="{{ URL::asset(env('ASSET_URL_IMAGE_CATEGORIA_PRODUTO_SITE') . '/not-image.png') }}"--}}
+{{--                                                            width="50px" height="50px"--}}
+{{--                                                            title="{{ $pedidosProdutos->produto_variacao->produto->descricao }} - {{ $pedidosProdutos->produto_variacao->variacao }}"--}}
+{{--                                                            data-toggle="tooltip"/>--}}
                                                     @endif
                                                 </td>
-                                                <td>{{ $pedidosProdutos->produto_variacao->produto->descricao }} - {{ $pedidosProdutos->produto_variacao->variacao }}</td>
                                                 <td>
                                                     <span>
                                                         @if($pedidosProdutos->quantidade > 1)
@@ -68,9 +70,13 @@
                                                     </span>
                                                 </td>
                                                 <td>R$ {{ number_format($pedidosProdutos->valor, 2, ',', '.') }}</td>
-                                                <td>R$ {{ number_format($pedidosProdutos->descontos, 2, ',', '.') }}</td>
+                                                <td>R$ {{ number_format($pedidosProdutos->desconto, 2, ',', '.') }}</td>
                                                 @php
-                                                    $total_produto = ($pedidosProdutos->quantidade * $pedidosProdutos->valor) - $pedidosProdutos->descontos;
+                                                    /** @var TYPE_NAME $pedidosProdutos */
+                                                    $total_produto = ($pedidosProdutos->quantidade * $pedidosProdutos->valor) - $pedidosProdutos->desconto;
+                                                    $sub_total += ($pedidosProdutos->quantidade * $pedidosProdutos->valor) ;
+                                                    /** @var TYPE_NAME $total_descontos */
+                                                    $total_descontos += $pedidosProdutos->desconto;
                                                     $total_pedido  += $total_produto;
                                                 @endphp
                                                 <td>R$ {{ number_format($total_produto, 2, ',', '.') }}</td>
@@ -84,23 +90,25 @@
                     <!-- Resumo do Pedido -->
                     <div class="col-lg-4">
                         <div class="card mb-3">
-                            <h2 class="card-header text-center font-weight-bold mb-4">Resumo</h2>
-                            <div class="card-body">                             
+                            <h2 class="card-header text-center font-weight-bold mb-2">Resumo</h2>
+                            <div class="card-body">
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>Subtotal</span>
-                                    <span>$19.99</span>
+                                    <span>R$ {{ number_format($sub_total, 2, ',', '.') }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span>Taxes</span>
-                                    <span>$1.99</span>
+                                    <span>Descontos</span>
+                                    <span>R$ {{ number_format($total_descontos, 2, ',', '.') }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
-                                    <span>Shipping</span>
-                                    <span>$0.00</span>
+                                    <span>Frete</span>
+                                    <span>R$ {{ number_format(0, 2, ',', '.') }}</span>
                                 </div>
-                                <div class="d-flex justify-content-between mb-2">
-                                    <span class="font-weight-bold">Total</span>
-                                    <span class="font-weight-bold">{{ number_format($total_pedido, 2, ',', '.') }}</span>
+                            </div>
+                            <div class="card-footer" style="padding: 1px">
+                                <div class="card-footer bg-rose text-white d-flex justify-content-between">
+                                    <span class="font-weight-bold"> <h4>Total </h4></span>
+                                    <span class="font-weight-bold"> <h4>R$ {{ number_format($total_pedido, 2, ',', '.') }} </h4></span>
                                 </div>
                             </div>
                         </div>
